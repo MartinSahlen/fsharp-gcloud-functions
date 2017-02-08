@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Sample project to create a library for Fable",
   "scripts": {
-    "build": "fable src/index.fsproj -o ./target -m commonjs && cp target/src/index.js ."
+    "build": "fable src/index.fsproj -o target -m commonjs && cp target/src/index.js ."
   },
   "keywords": [],
   "author": "",
