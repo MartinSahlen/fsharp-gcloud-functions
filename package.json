@@ -1,0 +1,25 @@
+{
+  "name": "fable-helpers-sample",
+  "version": "0.0.0",
+  "description": "Sample project to create a library for Fable",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fable-compiler/fable-helpers-sample.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fable-compiler/fable-helpers-sample/issues"
+  },
+  "homepage": "https://github.com/fable-compiler/fable-helpers-sample#readme",
+  "devDependencies": {
+    "fable-compiler": "^0.7.31",
+    "fable-core": "^0.7.23",
+    "fable-import-express": "0.0.11",
+    "fs-extra": "^2.0.0"
+  }
+}

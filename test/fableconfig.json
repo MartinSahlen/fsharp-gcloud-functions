@@ -1,0 +1,8 @@
+{
+    "projFile": "Test.fsx",
+    "module": "commonjs",
+    "outDir": "out",
+    "scripts": {
+        "postbuild": "node out/Test"
+    }
+}
