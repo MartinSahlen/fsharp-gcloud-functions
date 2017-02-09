@@ -6,6 +6,7 @@ module ExpressHelpers =
   type ExpressContext = {
     Request: express.Request
     Response: express.Response
+    Content: string
   }
 
   type ExpressPart = ExpressContext -> ExpressContext option
@@ -33,8 +34,16 @@ module ExpressHelpers =
 
   let answer = function
     | Some ctx ->
-      ctx.Response
+      ctx.Response.send ctx.Content
     | None -> raise (exn "Failed")
+
+  let execute request response app = 
+    let ctx = { Request = request; Response = response; Content = "" }
+    ctx |> (app >> answer)
+
+  let notFound str ctx =
+    let res = ctx.Response.status 404.
+    { ctx with Response = res; Content = str} |> Some
 
 open ExpressHelpers
 
@@ -43,19 +52,22 @@ let hasBodyPart str ctx =
   then 
     {
       ctx with 
-        Response = (ctx.Response.send ("Hello world: " + str))
+        Content = ctx.Content + "Hello: " + str
     } |> Some
   else
     None
 
+
+let app = 
+      choose 
+        [
+          hasBodyPart "Hello" >=> hasBodyPart "Tomas"
+          hasBodyPart "Yolo"
+          notFound "Stupid stupid me"
+        ]
+
 let helloTomas (request: express.Request) (response: express.Response) =
-  let ctx = { Request = request; Response = response }
-  ctx
-  |> choose [
-    hasBodyPart "Hello"
-    hasBodyPart "Yolo"
-  ]
-  |> answer
+  execute request response app
 //  response.send "Hello, World!"
 
 let yolo (request: express.Request) (response: express.Response) =
